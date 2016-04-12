@@ -10,6 +10,9 @@ python:
 
 matrix:
     include:
+        - os: linux
+          language: python
+          env: TOXENV=py27
         - os: osx
           language: generic
           env: TOXENV=py27
@@ -20,6 +23,8 @@ before_install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
       else
+        brew update
+        brew install python
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
       fi
     - chmod +x miniconda.sh

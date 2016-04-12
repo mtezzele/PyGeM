@@ -1,10 +1,12 @@
 
 language: python
 
+python:
+    - "2.7"
+
 matrix:
     include:
         - os: linux
-          python: 2.7
           env: TOXENV=py27
         - os: osx
           language: generic
@@ -30,11 +32,7 @@ before_install:
     - conda info -a
 
 install:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        conda create --yes -n test python=$TRAVIS_PYTHON_VERSION;
-      else
-        conda create --yes -n test python="2.7";
-      fi
+    - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
     - source activate test
     - conda install --yes numpy scipy matplotlib pip nose vtk
     - conda install --yes -c https://conda.anaconda.org/dlr-sc pythonocc-core
